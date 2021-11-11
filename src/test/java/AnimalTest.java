@@ -1,3 +1,4 @@
+import org.junit.Rule;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -6,6 +7,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class AnimalTest {
 
+    @Rule
+    public DatabaseRule database = new DatabaseRule();
 
     @Test
     @DisplayName("Animal Instantiates Correctly.")
@@ -33,6 +36,57 @@ public class AnimalTest {
         Animal testAnimal2 = setUpNewAnimal();
         assertTrue(testAnimal.equals(testAnimal2));
     }
+    @Test
+    @DisplayName("Animal saves objects")
+    public void save_insertsObjectIntoDatabase_Animal() {
+        Animal testAnimal = setUpNewAnimal();
+        testAnimal.save();
+        assertTrue(Animal.all().get(0).equals(testAnimal));
+    }
+    @Test
+    public void all_returnsAllInstancesOfAnimal_true() {
+        Animal testAnimal = setUpNewAnimal();
+        testAnimal.save();
+        Animal testAnimal2 = setUpNewAnimal();
+        testAnimal2.save();
+        assertEquals(true, Animal.all().get(0).equals(testAnimal));
+        assertEquals(true, Animal.all().get(1).equals(testAnimal2));
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     //helper method.
     private Animal setUpNewAnimal() {

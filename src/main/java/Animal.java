@@ -1,9 +1,13 @@
+import org.sql2o.Connection;
+
+import java.util.List;
 import java.util.Objects;
 
 public class Animal {
     //properties
     private String name;
     private String type;
+    private int id;
     //constructor
     public Animal(String name, String type) {
         this.name = name;
@@ -28,5 +32,22 @@ public class Animal {
     }
     public String getType(){
         return type;
+    }
+    public void save() {
+        try(Connection con = DB.sql2o.open()) {
+            String sql = "INSERT INTO animals (name, type) VALUES (:name, :type)";
+
+            this.id = (int) con.createQuery(sql, true)
+                    .addParameter("name", this.name)
+                    .addParameter("type", this.type)
+                    .executeUpdate()
+                    .getKey();
+        }
+    }
+    public static List<Animal> all() {
+        String sql = "SELECT * FROM animals";
+        try(Connection con = DB.sql2o.open()) {
+            return con.createQuery(sql).executeAndFetch(Animal.class);
+        }
     }
 }
