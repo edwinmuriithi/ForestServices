@@ -1,0 +1,26 @@
+plugins {
+    id 'java'
+    id 'application'
+}
+
+group 'org.example'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.0'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.0'
+    implementation "com.sparkjava:spark-template-handlebars:2.5.5"
+    implementation 'org.slf4j:slf4j-simple:1.7.21'
+    implementation 'org.sql2o:sql2o:1.5.4'
+    implementation group: 'org.postgresql', name: 'postgresql', version: '42.2.2'
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+}
+
+test {
+    useJUnitPlatform()
+}
