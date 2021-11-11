@@ -19,7 +19,12 @@ public class AnimalTest {
         Animal testAnimal = setUpNewAnimal();
         assertEquals("Betty", testAnimal.getName());
     }
-
+    @Test
+    @DisplayName("Animal Instantiates Correctly the type cow.")
+    public void getType_animalInstantiatesWithType_Cow() {
+        Animal testAnimal = setUpNewAnimal();
+        assertEquals("cow", testAnimal.getType());
+    }
 
     //helper method.
     private Animal setUpNewAnimal() {
