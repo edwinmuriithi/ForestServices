@@ -2,6 +2,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class AnimalTest {
 
@@ -24,6 +25,13 @@ public class AnimalTest {
     public void getType_animalInstantiatesWithType_Cow() {
         Animal testAnimal = setUpNewAnimal();
         assertEquals("cow", testAnimal.getType());
+    }
+    @Test
+    @DisplayName("Compare objects")
+    public void returnTrueIfNameAndTypeAreTheSame_true() {
+        Animal testAnimal = setUpNewAnimal();
+        Animal testAnimal2 = setUpNewAnimal();
+        assertTrue(testAnimal.equals(testAnimal2));
     }
 
     //helper method.
