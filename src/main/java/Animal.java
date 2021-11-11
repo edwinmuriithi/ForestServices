@@ -33,6 +33,7 @@ public class Animal {
     public String getType(){
         return type;
     }
+    //save
     public void save() {
         try(Connection con = DB.sql2o.open()) {
             String sql = "INSERT INTO animals (name, type) VALUES (:name, :type)";
@@ -44,10 +45,14 @@ public class Animal {
                     .getKey();
         }
     }
+    //fetch all animals
     public static List<Animal> all() {
         String sql = "SELECT * FROM animals";
         try(Connection con = DB.sql2o.open()) {
             return con.createQuery(sql).executeAndFetch(Animal.class);
         }
+    }
+    public int getId() {
+        return id;
     }
 }

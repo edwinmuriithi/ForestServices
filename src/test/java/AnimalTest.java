@@ -42,8 +42,17 @@ public class AnimalTest {
         Animal testAnimal = setUpNewAnimal();
         testAnimal.save();
         assertTrue(Animal.all().get(0).equals(testAnimal));
+        assertTrue(Animal.all().contains(testAnimal));
     }
     @Test
+    @DisplayName("Return one instances of Animal")
+    public void all_returnsOneInstancesOfAnimal_true() {
+        Animal testAnimal = setUpNewAnimal();
+        testAnimal.save();
+        assertEquals(1, Animal.all().size());
+    }
+    @Test
+    @DisplayName("Return all instances of Animal")
     public void all_returnsAllInstancesOfAnimal_true() {
         Animal testAnimal = setUpNewAnimal();
         testAnimal.save();
@@ -51,6 +60,15 @@ public class AnimalTest {
         testAnimal2.save();
         assertEquals(true, Animal.all().get(0).equals(testAnimal));
         assertEquals(true, Animal.all().get(1).equals(testAnimal2));
+        assertEquals(2, Animal.all().size());
+    }
+    @Test
+    @DisplayName("DB correctly assigns IDs to objects")
+    public void save_assignsIdToObject() {
+        Animal testAnimal = setUpNewAnimal();
+        testAnimal.save();
+        Animal savedAnimal = Animal.all().get(0);
+        assertEquals(testAnimal.getId(), savedAnimal.getId());
     }
 
 
