@@ -1,5 +1,4 @@
 import org.sql2o.Connection;
-
 import java.util.List;
 import java.util.Objects;
 
@@ -12,6 +11,10 @@ public class Animal {
     public Animal(String name, String type) {
         this.name = name;
         this.type = type;
+    }
+
+    public static int find(int id) {
+        return id;
     }
 
     @Override
