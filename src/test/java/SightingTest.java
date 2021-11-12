@@ -32,7 +32,12 @@ public class SightingTest {
         assertEquals(1, testSighting.getAnimalId());
     }
 
-
+    @Test
+    @DisplayName("Animal Instantiates Correctly the rangerId 1.")
+    public void getRangerId_sightingInstantiatesWithRanger_1() {
+        Sighting testSighting = setUpNewSighting();
+        assertEquals(1, testSighting.getRangerId());
+    }
 
 
 
