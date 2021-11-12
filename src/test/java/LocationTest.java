@@ -26,6 +26,12 @@ public class LocationTest {
         assertEquals(true, testLocation instanceof Location);
     }
 
+    @Test
+    @DisplayName("Location Instantiates Correctly the animalId 1.")
+    public void getAnimalId_sightingInstantiatesWithAnimalId_1() {
+        Location testLocation = setUpNewLocation();
+        assertEquals("Location 1", testLocation.getLocationName());
+    }
 
 
 
