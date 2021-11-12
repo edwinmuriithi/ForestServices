@@ -13,11 +13,7 @@ public class Animal {
         this.type = type;
     }
 
-    public static int find(int id) {
-        return id;
-    }
-
-    @Override
+     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof Animal)) return false;
@@ -33,9 +29,11 @@ public class Animal {
     public String getName(){
         return name;
     }
+
     public String getType(){
         return type;
     }
+
     //save
     public void save() {
         try(Connection con = DB.sql2o.open()) {
@@ -48,6 +46,7 @@ public class Animal {
                     .getKey();
         }
     }
+
     //fetch all animals
     public static List<Animal> all() {
         String sql = "SELECT * FROM animals";
@@ -55,7 +54,16 @@ public class Animal {
             return con.createQuery(sql).executeAndFetch(Animal.class);
         }
     }
+
     public int getId() {
         return id;
+    }
+
+    public static Animal find(int id){
+        try(Connection con = DB.sql2o.open()){
+            String sql = "SELECT * FROM animals WHERE id=:id";
+            Animal animal = con.createQuery(sql).addParameter("id",id).executeAndFetchFirst(Animal.class);
+            return animal;
+        }
     }
 }

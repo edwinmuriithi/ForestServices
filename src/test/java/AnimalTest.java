@@ -81,12 +81,13 @@ public class AnimalTest {
     }
 
     @Test
-    public void find_returnsPersonWithSameId_secondPerson() {
+    @DisplayName("Find returns correct object")
+    public void find_returnsPersonWithSameId_testAnimal2() {
         Animal testAnimal = setUpNewAnimal();
         testAnimal.save();
         Animal testAnimal2 = setUpNewAnimal2();
         testAnimal2.save();
-        assertEquals(Animal.find(testAnimal.getId()), testAnimal2);
+        assertEquals(Animal.find(testAnimal2.getId()), testAnimal2);
     }
 
 
