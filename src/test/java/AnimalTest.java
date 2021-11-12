@@ -134,12 +134,29 @@ public class AnimalTest {
             testAnimal.save();
 
         }catch (IllegalArgumentException e){
-            System.out.println(e);
+            System.out.println("e");
         }
         assertEquals("", testAnimal.getName());
         assertEquals(0, Animal.all().size());
     }
 
+    @Test
+    @DisplayName("Validate type")
+    public void ensureTypeFieldCannotBeEmpty(){
+
+        Animal testAnimal = new Animal("Rose", "");
+        try {
+            if (testAnimal.getType().equals("")){
+                throw new IllegalArgumentException("You cannot leave this blank");
+            }
+                testAnimal.save();
+
+        }catch (IllegalArgumentException e){
+            System.out.println(e);
+        }
+        assertEquals("", testAnimal.getType());
+        assertEquals(0, Animal.all().size());
+    }
 
 
 
