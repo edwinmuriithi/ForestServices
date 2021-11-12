@@ -1,3 +1,5 @@
+import java.util.Objects;
+
 public class Sighting {
 
     private int animalId;
@@ -10,6 +12,19 @@ public class Sighting {
         this.locationId = locationId;
 
 
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Sighting)) return false;
+        Sighting sighting = (Sighting) o;
+        return getAnimalId() == sighting.getAnimalId() && getRangerId() == sighting.getRangerId() && getLocationId() == sighting.getLocationId();
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getAnimalId(), getRangerId(), getLocationId());
     }
 
     public int getAnimalId() {

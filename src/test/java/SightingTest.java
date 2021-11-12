@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 import org.sql2o.Connection;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class SightingTest {
 
@@ -28,6 +29,14 @@ public class SightingTest {
     }
 
     @Test
+    @DisplayName("Compare Sighting objects")
+    public void returnTrueIfSightingIsTheSame_true() {
+        Sighting testSighting = setUpNewSighting();
+        Sighting testSighting2 = setUpNewSighting();
+        assertTrue(testSighting.equals(testSighting2));
+    }
+
+    @Test
     @DisplayName("Sighting Instantiates Correctly the animalId 1.")
     public void getAnimalId_sightingInstantiatesWithAnimalId_1() {
         Sighting testSighting = setUpNewSighting();
@@ -47,28 +56,6 @@ public class SightingTest {
         Sighting testSighting = setUpNewSighting();
         assertEquals(1, testSighting.getLocationId());
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
     //helper method.
     private Sighting setUpNewSighting() {
