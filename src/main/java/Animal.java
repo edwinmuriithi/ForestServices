@@ -7,6 +7,7 @@ public class Animal {
     private String name;
     private String type;
     private int id;
+
     //constructor
     public Animal(String name, String type) {
         this.name = name;
@@ -55,10 +56,12 @@ public class Animal {
         }
     }
 
+    //get ID
     public int getId() {
         return id;
     }
 
+    //Find Animal by ID
     public static Animal find(int id){
         try(Connection con = DB.sql2o.open()){
             String sql = "SELECT * FROM animals WHERE id=:id";
@@ -66,4 +69,22 @@ public class Animal {
             return animal;
         }
     }
-}
+
+    //Delete by ID
+    public void deleteById(int id) {
+        String sql = "DELETE FROM animals WHERE id= :id";
+        try(Connection con = DB.sql2o.open()) {
+            con.createQuery(sql).addParameter("id", this.id).executeUpdate();
+        }
+    }
+
+    //
+
+
+
+
+
+
+
+
+        }

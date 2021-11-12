@@ -19,6 +19,7 @@ public class AnimalTest {
             con.createQuery(deleteAnimalsQuery).executeUpdate();
         }
     }
+
     @Test
     @DisplayName("Animal Instantiates Correctly.")
     public void testInstanceOfAnimal_true(){
@@ -32,12 +33,14 @@ public class AnimalTest {
         Animal testAnimal = setUpNewAnimal();
         assertEquals("Betty", testAnimal.getName());
     }
+
     @Test
     @DisplayName("Animal Instantiates Correctly the type cow.")
     public void getType_animalInstantiatesWithType_Cow() {
         Animal testAnimal = setUpNewAnimal();
         assertEquals("cow", testAnimal.getType());
     }
+
     @Test
     @DisplayName("Compare objects")
     public void returnTrueIfNameAndTypeAreTheSame_true() {
@@ -45,6 +48,7 @@ public class AnimalTest {
         Animal testAnimal2 = setUpNewAnimal();
         assertTrue(testAnimal.equals(testAnimal2));
     }
+
     @Test
     @DisplayName("Animal saves objects")
     public void save_insertsObjectIntoDatabase_Animal() {
@@ -53,6 +57,7 @@ public class AnimalTest {
         assertTrue(Animal.all().get(0).equals(testAnimal));
         assertTrue(Animal.all().contains(testAnimal));
     }
+
     @Test
     @DisplayName("Return one instances of Animal")
     public void all_returnsOneInstancesOfAnimal_true() {
@@ -60,6 +65,7 @@ public class AnimalTest {
         testAnimal.save();
         assertEquals(1, Animal.all().size());
     }
+
     @Test
     @DisplayName("Return all instances of Animal")
     public void all_returnsAllInstancesOfAnimal_true() {
@@ -71,6 +77,7 @@ public class AnimalTest {
         assertEquals(true, Animal.all().get(1).equals(testAnimal2));
         assertEquals(2, Animal.all().size());
     }
+
     @Test
     @DisplayName("DB correctly assigns IDs to objects")
     public void save_assignsIdToObject() {
@@ -90,6 +97,17 @@ public class AnimalTest {
         assertEquals(Animal.find(testAnimal2.getId()), testAnimal2);
     }
 
+    @Test
+    @DisplayName("Delete by ID")
+    public void deleteById() {
+        Animal testAnimal = setUpNewAnimal();
+        testAnimal.save();
+        Animal testAnimal2 = setUpNewAnimal2();
+        testAnimal2.save();
+        testAnimal.deleteById(testAnimal.getId());
+        assertEquals(null, Animal.find(testAnimal.getId()));
+        assertEquals(1, Animal.all().size());
+    }
 
 
 
