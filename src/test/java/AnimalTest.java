@@ -4,6 +4,8 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.sql2o.Connection;
 
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -109,7 +111,17 @@ public class AnimalTest {
         assertEquals(1, Animal.all().size());
     }
 
-
+    @Test
+    @DisplayName("Delete all Animal entries.")
+    public void deleteAllEntries() {
+        Animal testAnimal = setUpNewAnimal();
+        testAnimal.save();
+        Animal testAnimal2 = setUpNewAnimal2();
+        testAnimal2.save();
+        Animal.deleteAll();
+        List<Animal> animals=Animal.all();
+        assertEquals(0,animals.size());
+    }
 
 
 

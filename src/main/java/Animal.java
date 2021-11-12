@@ -78,7 +78,13 @@ public class Animal {
         }
     }
 
-    //
+    //Delete all Animals
+    public static void deleteAll(){
+        String sql = "DELETE FROM animals";
+        try(Connection con = DB.sql2o.open()) {
+            con.createQuery(sql).executeUpdate();
+        }
+    }
 
 
 
