@@ -21,11 +21,16 @@ public class SightingTest {
 
     @Test
     @DisplayName("Sighting Instantiates Correctly.")
-    public void testInstanceOfAnimal_true(){
+    public void testInstanceOfSighting_true(){
         Sighting testSighting = setUpNewSighting();
         assertEquals(true, testSighting instanceof Sighting);
     }
-
+    @Test
+    @DisplayName("Animal Instantiates Correctly the animalId 1.")
+    public void getAnimalId_sightingInstantiatesWithAnimalId_1() {
+        Sighting testSighting = setUpNewSighting();
+        assertEquals(1, testSighting.getAnimalId());
+    }
 
 
 
