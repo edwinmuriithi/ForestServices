@@ -123,6 +123,23 @@ public class AnimalTest {
         assertEquals(0,animals.size());
     }
 
+    @Test
+    @DisplayName("Validate name")
+    public void ensureNameFieldCannotBeEmpty(){
+        Animal testAnimal = new Animal("","cow");
+        try {
+            if (testAnimal.getName().equals("")){
+                throw new IllegalArgumentException("You cannot leave this blank");
+            }
+            testAnimal.save();
+
+        }catch (IllegalArgumentException e){
+            System.out.println(e);
+        }
+        assertEquals("", testAnimal.getName());
+        assertEquals(0, Animal.all().size());
+    }
+
 
 
 
