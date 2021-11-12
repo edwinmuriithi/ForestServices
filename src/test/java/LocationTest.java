@@ -28,10 +28,10 @@ public class LocationTest {
     }
 
     @Test
-    @DisplayName("Location Instantiates Correctly with locationName.")
-    public void getLocationName_locationInstantiatesWithLocationName() {
+    @DisplayName("Location Instantiates Correctly with location Name.")
+    public void getName_locationInstantiatesWithLocationName() {
         Location testLocation = setUpNewLocation();
-        assertEquals("Location 1", testLocation.getLocationName());
+        assertEquals("Location 1", testLocation.getName());
     }
 
     @Test
@@ -42,7 +42,14 @@ public class LocationTest {
         assertTrue(testLocation.equals(testLocation2));
     }
 
-
+    @Test
+    @DisplayName("Location saves objects")
+    public void save_insertsObjectIntoDatabase_Location() {
+        Location testLocation = setUpNewLocation();
+        testLocation.save();
+        assertTrue(Location.all().get(0).equals(testLocation));
+        assertTrue(Location.all().contains(testLocation));
+    }
 
 
 

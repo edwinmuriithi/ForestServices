@@ -1,26 +1,51 @@
+import org.sql2o.Connection;
+
+import java.util.List;
 import java.util.Objects;
 
 public class Location {
+
+    private String name;
+    private int id;
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof Location)) return false;
         Location location = (Location) o;
-        return Objects.equals(getLocationName(), location.getLocationName());
+        return Objects.equals(getName(), location.getName());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getLocationName());
+        return Objects.hash(getName());
     }
 
-    private String locationName;
-
-    public Location(String locationName) {
-        this.locationName = locationName;
+    public Location(String name) {
+        this.name = name;
     }
 
-    public String getLocationName() {
-        return locationName;
+    public String getName() {
+        return name;
+    }
+
+    public static List<Location> all() {
+        String sql = "SELECT * FROM locations";
+        try(Connection con = DB.sql2o.open()) {
+            return con.createQuery(sql).executeAndFetch(Location.class);
+        }
+    }
+
+    public void save() {
+        try (Connection con=DB.sql2o.open()){
+            String sql="INSERT INTO locations (name) VALUES (:name)";
+            if(name.equals("")){
+                throw new IllegalArgumentException("All fields must be filled");
+            }
+            this.id=(int) con.createQuery(sql,true)
+                    .addParameter("name",this.name)
+                    .executeUpdate()
+                    .getKey();
+        }
     }
 }
