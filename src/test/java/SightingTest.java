@@ -7,6 +7,7 @@ import org.sql2o.Connection;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class SightingTest {
+
     @Rule
     public DatabaseRule database = new DatabaseRule();
 
@@ -25,26 +26,30 @@ public class SightingTest {
         Sighting testSighting = setUpNewSighting();
         assertEquals(true, testSighting instanceof Sighting);
     }
+
     @Test
-    @DisplayName("Animal Instantiates Correctly the animalId 1.")
+    @DisplayName("Sighting Instantiates Correctly the animalId 1.")
     public void getAnimalId_sightingInstantiatesWithAnimalId_1() {
         Sighting testSighting = setUpNewSighting();
         assertEquals(1, testSighting.getAnimalId());
     }
 
     @Test
-    @DisplayName("Animal Instantiates Correctly the rangerId 1.")
+    @DisplayName("Sighting Instantiates Correctly the rangerId 1.")
     public void getRangerId_sightingInstantiatesWithRanger_1() {
         Sighting testSighting = setUpNewSighting();
         assertEquals(1, testSighting.getRangerId());
     }
 
     @Test
-    @DisplayName("Animal Instantiates Correctly the locationId 1.")
+    @DisplayName("Sighting Instantiates Correctly the locationId 1.")
     public void getLocationId_sightingInstantiatesWithLocationId_1() {
         Sighting testSighting = setUpNewSighting();
         assertEquals(1, testSighting.getLocationId());
     }
+
+
+
 
 
 

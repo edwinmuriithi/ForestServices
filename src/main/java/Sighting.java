@@ -4,11 +4,12 @@ public class Sighting {
     private int rangerId;
     private int locationId;
 
-
     public Sighting(int i, int animalId, int rangerId, int locationId) {
         this.animalId = animalId;
         this.rangerId = rangerId;
         this.locationId = locationId;
+
+
     }
 
     public int getAnimalId() {
