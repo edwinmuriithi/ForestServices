@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 import org.sql2o.Connection;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class LocationTest {
     @Rule
@@ -27,17 +28,19 @@ public class LocationTest {
     }
 
     @Test
-    @DisplayName("Location Instantiates Correctly the animalId 1.")
-    public void getAnimalId_sightingInstantiatesWithAnimalId_1() {
+    @DisplayName("Location Instantiates Correctly with locationName.")
+    public void getLocationName_locationInstantiatesWithLocationName() {
         Location testLocation = setUpNewLocation();
         assertEquals("Location 1", testLocation.getLocationName());
     }
 
-
-
-
-
-
+    @Test
+    @DisplayName("Compare Location objects")
+    public void returnTrueIfLocationNameIsTheSame_true() {
+        Location testLocation = setUpNewLocation();
+        Location testLocation2 = setUpNewLocation();
+        assertTrue(testLocation.equals(testLocation2));
+    }
 
 
 
@@ -48,5 +51,7 @@ public class LocationTest {
     private Location setUpNewLocation() {
         return new Location ("Location 1");
     }
-
-}
+    private Location setUpNewLocation2() {
+        return new Location ("Location 2");
+    }
+    }
