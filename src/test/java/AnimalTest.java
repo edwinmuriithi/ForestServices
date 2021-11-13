@@ -132,7 +132,7 @@ public class AnimalTest {
             testAnimal.save();
 
         }catch (IllegalArgumentException e){
-            System.out.println("e");
+            System.out.println(e);
         }
         assertEquals("", testAnimal.getName());
         assertEquals(0, Animal.all().size());

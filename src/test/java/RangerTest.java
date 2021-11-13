@@ -123,6 +123,23 @@ public class RangerTest {
         assertEquals(0, rangers.size());
     }
 
+    @Test
+    @DisplayName("Validate name")
+    public void ensureNameFieldCannotBeEmpty(){
+        Ranger testRanger = new Ranger("",1);
+        try {
+            if (testRanger.getName().equals("")){
+                throw new IllegalArgumentException("You cannot leave this blank");
+            }
+            testRanger.save();
+
+        }catch (IllegalArgumentException e){
+            System.out.println(e);
+        }
+        assertEquals("", testRanger.getName());
+        assertEquals(0, Ranger.all().size());
+    }
+
 
 
 
