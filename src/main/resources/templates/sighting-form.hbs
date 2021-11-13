@@ -1,0 +1,51 @@
+{{#partial "content"}}
+sighting-form
+    <div class="form">
+        <form action="/create/sighting/new" method="post">
+            <h2 class="text display-6">CREATE SIGHTING</h2>
+            <hr>
+            <div class="form-group">
+                <select class = "form-select form-select-lg" id = "location" name = "location">
+                    <option selected>Choose Location</option>
+                    {{#if locations}}
+                        {{#each locations as |location|}}
+                            <option name="location" value={{location.id}}>{{location.name}}</option>
+                        {{/each}}
+                    {{/if}}
+                </select>
+            </div>
+            <br>
+            <div class="form-group">
+                <select class = "form-select form-select-lg" id = "location" name = "location">
+                    <option selected>Choose Ranger</option>
+                    {{#if rangers}}
+                        {{#each locations as |ranger|}}
+                            <option name="ranger" value={{ranger.id}}>{{ranger.name}}</option>
+                        {{/each}}
+                    {{/if}}
+                </select>
+            </div>
+            <br>
+            <div class="form-group">
+                <select class = "form-select form-select-lg" id = "location" name = "location">
+                    <option selected>Choose Animal</option>
+                    {{#if animals}}
+                        {{#each locations as |animal|}}
+                            <option name="animal" value={{animal.id}}>{{animal.name}}</option>
+                        {{/each}}
+                    {{/if}}
+                </select>
+            </div>
+
+            <hr>
+            <div class="form-group">
+                <button type="submit" class="btn btn-success btn-lg"> Create </button>
+            </div>
+        </form>
+    </div>
+
+{{/partial}}
+{{> layout.hbs}}
+
+
+

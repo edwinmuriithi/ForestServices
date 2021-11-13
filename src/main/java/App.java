@@ -49,8 +49,22 @@ public class App {
             return new ModelAndView(model,"location-form.hbs");
         },new HandlebarsTemplateEngine());
 
+        // navigate to sighting creation form
+        get("/create/sighting",(request, response) -> {
+            Map<String,Object> model=new HashMap<String, Object>();
+            return new ModelAndView(model,"sighting-form.hbs");
+        },new HandlebarsTemplateEngine());
 
-
+        //create a sighting.
+        post("/create/sighting/new",(request, response) -> {
+            Map<String,Object> model=new HashMap<String, Object>();
+            int location_id= Integer.parseInt(request.queryParams("location"));
+            int ranger_id= Integer.parseInt(request.queryParams("ranger"));
+            int animal_id= Integer.parseInt(request.queryParams("animal"));
+            Sighting sighting=new Sighting(location_id,ranger_id,animal_id);
+//            sighting.save();
+            return new ModelAndView(model,"sighting-form.hbs");
+        },new HandlebarsTemplateEngine());
 
 
 

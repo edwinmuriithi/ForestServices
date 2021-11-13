@@ -56,8 +56,18 @@ public class SightingTest {
         assertEquals(1, testSighting.getLocationId());
     }
 
+    @Test
+    @DisplayName("Sighting saves objects")
+    public void save_insertsObjectIntoDatabase_Sighting() {
+        Sighting testSighting = setUpNewSighting();
+        testSighting.save();
+        assertEquals(1, Sighting.all().size());
+    }
+
+
+
     //helper method.
     private Sighting setUpNewSighting() {
-        return new Sighting (1,1,1, 1);
+        return new Sighting (1,1, 1);
     }
 }
