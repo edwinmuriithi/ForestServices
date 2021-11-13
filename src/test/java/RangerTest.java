@@ -44,13 +44,20 @@ public class RangerTest {
 
     @Test
     @DisplayName("Compare objects")
-    public void returnTrueIfNameAndTypeAreTheSame_true() {
+    public void returnTrueIfNameAndBadgeNumberAreTheSame_true() {
         Ranger testRanger = setUpNewRanger();
         Ranger testRanger2 = setUpNewRanger();
         assertTrue(testRanger.equals(testRanger2));
     }
 
-
+    @Test
+    @DisplayName("Ranger saves objects")
+    public void save_insertsObjectIntoDatabase_Ranger() {
+        Ranger testRanger = setUpNewRanger();
+        testRanger.save();
+        assertTrue(Ranger.all().get(0).equals(testRanger));
+        assertTrue(Ranger.all().contains(testRanger));
+    }
 
 
 
