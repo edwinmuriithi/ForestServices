@@ -21,12 +21,19 @@ public class EndangeredAnimalTest {
 
     @Test
     @DisplayName("EndangeredAnimal Instantiates Correctly.")
-    public void testInstanceOfAnimal_true(){
+    public void testInstanceOfEndangeredAnimal_true(){
         EndangeredAnimal testEndangeredAnimalTest = setUpNewEndangeredAnimal();
         assertEquals(true, testEndangeredAnimalTest instanceof EndangeredAnimal);
     }
 
-
+    @Test
+    @DisplayName("EndangeredAnimal saves")
+    public void allInstancesAreSaved(){
+        EndangeredAnimal testEndangeredAnimalTest = setUpNewEndangeredAnimal();
+        testEndangeredAnimalTest.save();
+        assertEquals(true, EndangeredAnimal.all().contains(testEndangeredAnimalTest));
+//        assertTrue(testEndangeredAnimalTest.all().get(0).getHealth().equals(testEndangeredAnimalTest.getHealth()));
+    }
 
 
 
