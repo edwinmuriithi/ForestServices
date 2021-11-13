@@ -13,10 +13,10 @@ public class LocationTest {
 
     @AfterEach
     protected void after() {
-        //clear animals table after each test
+        //clear locations table after each test
         try(Connection con = DB.sql2o.open()) {
-            String deleteAnimalsQuery = "DELETE FROM animals;";
-            con.createQuery(deleteAnimalsQuery).executeUpdate();
+            String deleteLocationsQuery = "DELETE FROM locations;";
+            con.createQuery(deleteLocationsQuery).executeUpdate();
         }
     }
 
@@ -29,14 +29,14 @@ public class LocationTest {
 
     @Test
     @DisplayName("Location Instantiates Correctly with location Name.")
-    public void getName_locationInstantiatesWithLocationName() {
+    public void getName_locationInstantiatesWithName() {
         Location testLocation = setUpNewLocation();
         assertEquals("Location 1", testLocation.getName());
     }
 
     @Test
     @DisplayName("Compare Location objects")
-    public void returnTrueIfLocationNameIsTheSame_true() {
+    public void returnTrueIfLocationIsTheSame_true() {
         Location testLocation = setUpNewLocation();
         Location testLocation2 = setUpNewLocation();
         assertTrue(testLocation.equals(testLocation2));
@@ -50,6 +50,35 @@ public class LocationTest {
         assertTrue(Location.all().get(0).equals(testLocation));
         assertTrue(Location.all().contains(testLocation));
     }
+
+    @Test
+    @DisplayName("Return all instances of Location")
+    public void all_returnsOneInstancesOfLocation_true() {
+        Location testLocation = setUpNewLocation();
+        testLocation.save();
+        Location testLocation2 = setUpNewLocation2();
+        testLocation2.save();
+        assertEquals(2, Location.all().size());
+        assertEquals(true, Location.all().contains(testLocation));
+        assertEquals(true, Location.all().contains(testLocation2));
+
+    }
+
+    @Test
+    @DisplayName("DB correctly assigns IDs to objects")
+    public void save_assignsIdToObject() {
+        Location testLocation = setUpNewLocation();
+        testLocation.save();
+        Location savedLocation = Location.all().get(0);
+        assertEquals(testLocation.getId(), savedLocation.getId());
+    }
+
+
+
+
+
+
+
 
 
 

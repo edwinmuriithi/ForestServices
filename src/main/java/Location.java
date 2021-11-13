@@ -42,10 +42,14 @@ public class Location {
             if(name.equals("")){
                 throw new IllegalArgumentException("All fields must be filled");
             }
-            this.id=(int) con.createQuery(sql,true)
-                    .addParameter("name",this.name)
+            this.id = (int) con.createQuery(sql,true)
+                    .addParameter("name", this.name)
                     .executeUpdate()
                     .getKey();
         }
+    }
+
+    public int getId() {
+        return id;
     }
 }

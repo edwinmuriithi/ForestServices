@@ -12,13 +12,13 @@ public class DatabaseRule extends ExternalResource {
     protected void after() {
         //clear animals table after each test
         try(Connection con = DB.sql2o.open()) {
-            String deleteAnimalsQuery = "DELETE FROM animals;";
-            con.createQuery("DELETE FROM animals;").executeUpdate();
-            String dropAnimalsTestDatabase = "DROP DATABASE animals_test;";
-            con.createQuery(dropAnimalsTestDatabase).executeUpdate();
-            String createAnimalsTestDatabase = "CREATE DATABASE animals_test WITH TEMPLATE animals;";
-            con.createQuery(createAnimalsTestDatabase).executeUpdate();
 
+            String deleteAnimalsQuery = "DELETE FROM animals;";
+            con.createQuery(deleteAnimalsQuery).executeUpdate();
+            String deleteLocationsQuery = "DELETE FROM locations;";
+            con.createQuery(deleteLocationsQuery).executeUpdate();
         }
+
+
     }
 }
