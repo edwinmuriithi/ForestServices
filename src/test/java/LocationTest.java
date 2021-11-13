@@ -3,6 +3,9 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.sql2o.Connection;
+
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -93,6 +96,18 @@ public class LocationTest {
         testLocation.deleteById(testLocation.getId());
         assertEquals(null, Location.find(testLocation.getId()));
         assertEquals(1, Location.all().size());
+    }
+
+    @Test
+    @DisplayName("Delete all Location entries.")
+    public void deleteAllEntries() {
+        Location testLocation = setUpNewLocation();
+        testLocation.save();
+        Location testLocation2 = setUpNewLocation2();
+        testLocation2.save();
+        Location.deleteAll();
+        List<Location> locations = Location.all();
+        assertEquals(0, locations.size());
     }
 
 

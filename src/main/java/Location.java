@@ -16,6 +16,14 @@ public class Location {
         }
     }
 
+    public static void deleteAll() {
+        String sql = "DELETE FROM locations";
+            try(Connection con = DB.sql2o.open()) {
+                con.createQuery(sql).executeUpdate();
+        }
+
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
