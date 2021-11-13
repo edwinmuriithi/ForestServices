@@ -87,6 +87,16 @@ public class RangerTest {
         assertEquals(testRanger.getId(), savedAnimal.getId());
     }
 
+    @Test
+    @DisplayName("Find returns correct object")
+    public void find_returnsPersonWithSameId_testRanger2() {
+        Ranger testRanger = setUpNewRanger();
+        testRanger.save();
+        Ranger testRanger2 = setUpNewRanger2();
+        testRanger2.save();
+        assertEquals(Ranger.find(testRanger2.getId()), testRanger2);
+    }
+
 
 
 
