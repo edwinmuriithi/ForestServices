@@ -4,6 +4,8 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.sql2o.Connection;
 
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 public class RangerTest {
@@ -107,6 +109,18 @@ public class RangerTest {
         testRanger.deleteById(testRanger.getId());
         assertEquals(null, Ranger.find(testRanger.getId()));
         assertEquals(1, Ranger.all().size());
+    }
+
+    @Test
+    @DisplayName("Delete all Ranger entries.")
+    public void deleteAllEntries() {
+        Ranger testRanger = setUpNewRanger();
+        testRanger.save();
+        Ranger testRanger2 = setUpNewRanger2();
+        testRanger2.save();
+        Ranger.deleteAll();
+        List<Ranger> rangers = Ranger.all();
+        assertEquals(0, rangers.size());
     }
 
 
