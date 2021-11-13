@@ -67,7 +67,17 @@ public class RangerTest {
         assertEquals(1, Ranger.all().size());
     }
 
-
+    @Test
+    @DisplayName("Return all instances of Ranger")
+    public void all_returnsAllInstancesOfRanger_true() {
+        Ranger testRanger = setUpNewRanger();
+        testRanger.save();
+        Ranger testRanger2 = setUpNewRanger2();
+        testRanger2.save();
+        assertEquals(true, Ranger.all().get(0).equals(testRanger));
+        assertEquals(true, Ranger.all().get(1).equals(testRanger2));
+        assertEquals(2, Ranger.all().size());
+    }
 
 
 
