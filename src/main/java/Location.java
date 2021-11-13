@@ -8,6 +8,14 @@ public class Location {
     private String name;
     private int id;
 
+    public static Location find(int id) {
+        try(Connection con = DB.sql2o.open()){
+            String sql = "SELECT * FROM locations WHERE id=:id";
+            Location location = con.createQuery(sql).addParameter("id",id).executeAndFetchFirst(Location.class);
+            return location;
+        }
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

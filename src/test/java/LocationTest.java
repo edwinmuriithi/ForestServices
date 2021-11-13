@@ -3,11 +3,11 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.sql2o.Connection;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class LocationTest {
+
     @Rule
     public DatabaseRule database = new DatabaseRule();
 
@@ -71,6 +71,16 @@ public class LocationTest {
         testLocation.save();
         Location savedLocation = Location.all().get(0);
         assertEquals(testLocation.getId(), savedLocation.getId());
+    }
+
+    @Test
+    @DisplayName("Find returns correct object")
+    public void find_returnsLocationWithSameId_testLocation2() {
+        Location testLocation = setUpNewLocation();
+        testLocation.save();
+        Location testLocation2 = setUpNewLocation2();
+        testLocation2.save();
+        assertEquals(Location.find(testLocation2.getId()), testLocation2);
     }
 
 
