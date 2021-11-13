@@ -27,6 +27,13 @@ public class RangerTest {
         assertEquals(true, testRanger instanceof Ranger);
     }
 
+    @Test
+    @DisplayName("Ranger Instantiates Correctly the name Chuck.")
+    public void getName_rangerInstantiatesWithName_Chuck() {
+        Ranger testRanger = setUpNewRanger();
+        assertEquals("Chuck", testRanger.getName());
+    }
+
 
 
 
