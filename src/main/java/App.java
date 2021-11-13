@@ -62,7 +62,7 @@ public class App {
             int ranger_id= Integer.parseInt(request.queryParams("ranger"));
             int animal_id= Integer.parseInt(request.queryParams("animal"));
             Sighting sighting=new Sighting(location_id,ranger_id,animal_id);
-//            sighting.save();
+            sighting.save();
             return new ModelAndView(model,"sighting-form.hbs");
         },new HandlebarsTemplateEngine());
 
