@@ -34,6 +34,12 @@ public class RangerTest {
         assertEquals("Chuck", testRanger.getName());
     }
 
+    @Test
+    @DisplayName("Ranger Instantiates Correctly the badge_number of 1.")
+    public void getBadgeNumber_rangerInstantiatesWithBadgeNumber_1() {
+        Ranger testRanger = setUpNewRanger();
+        assertEquals(1, testRanger.getBadgeNumber());
+    }
 
 
 
