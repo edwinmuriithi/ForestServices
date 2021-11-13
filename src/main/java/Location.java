@@ -60,4 +60,11 @@ public class Location {
     public int getId() {
         return id;
     }
+
+    public void deleteById(int id) {
+        String sql = "DELETE FROM locations WHERE id= :id";
+        try(Connection con = DB.sql2o.open()) {
+            con.createQuery(sql).addParameter("id", this.id).executeUpdate();
+        }
+    }
 }

@@ -83,6 +83,18 @@ public class LocationTest {
         assertEquals(Location.find(testLocation2.getId()), testLocation2);
     }
 
+    @Test
+    @DisplayName("Delete by ID")
+    public void deleteById() {
+        Location testLocation = setUpNewLocation();
+        testLocation.save();
+        Location testLocation2 = setUpNewLocation2();
+        testLocation2.save();
+        testLocation.deleteById(testLocation.getId());
+        assertEquals(null, Location.find(testLocation.getId()));
+        assertEquals(1, Location.all().size());
+    }
+
 
 
 
