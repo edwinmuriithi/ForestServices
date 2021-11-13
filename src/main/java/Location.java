@@ -75,4 +75,5 @@ public class Location {
             con.createQuery(sql).addParameter("id", this.id).executeUpdate();
         }
     }
+
 }

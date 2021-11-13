@@ -10,15 +10,18 @@ public class DatabaseRule extends ExternalResource {
     }
     @Override
     protected void after() {
-        //clear animals table after each test
+        //clear table after each test
         try(Connection con = DB.sql2o.open()) {
 
             String deleteAnimalsQuery = "DELETE FROM animals;";
             con.createQuery(deleteAnimalsQuery).executeUpdate();
+
             String deleteLocationsQuery = "DELETE FROM locations;";
             con.createQuery(deleteLocationsQuery).executeUpdate();
-        }
 
+            String deleteRangerQuery = "DELETE FROM rangers;";
+            con.createQuery(deleteRangerQuery).executeUpdate();
+        }
 
     }
 }
