@@ -59,7 +59,13 @@ public class RangerTest {
         assertTrue(Ranger.all().contains(testRanger));
     }
 
-
+    @Test
+    @DisplayName("Return one instances of Ranger")
+    public void all_returnsOneInstancesOfRanger_true() {
+        Ranger testRanger = setUpNewRanger();
+        testRanger.save();
+        assertEquals(1, Ranger.all().size());
+    }
 
 
 
