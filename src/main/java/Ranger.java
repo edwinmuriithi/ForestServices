@@ -5,12 +5,12 @@ import java.util.Objects;
 
 public class Ranger {
 
-    private int badge_number;
+    private String badge_number;
     private String name;
     private int id;
 
     //constructor.
-    public Ranger(String name, int badge_number) {
+    public Ranger(String name, String badge_number) {
         this.name = name;
         this.badge_number = badge_number;
 
@@ -28,19 +28,19 @@ public class Ranger {
         if (this == o) return true;
         if (!(o instanceof Ranger)) return false;
         Ranger ranger = (Ranger) o;
-        return badge_number == ranger.badge_number && getName().equals(ranger.getName());
+        return getId() == ranger.getId() && badge_number.equals(ranger.badge_number) && getName().equals(ranger.getName());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(badge_number, getName());
+        return Objects.hash(badge_number, getName(), getId());
     }
 
     public String getName() {
         return name;
     }
 
-    public int getBadgeNumber() {
+    public String getBadgeNumber() {
         return badge_number;
     }
 

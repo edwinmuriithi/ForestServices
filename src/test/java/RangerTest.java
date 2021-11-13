@@ -40,7 +40,7 @@ public class RangerTest {
     @DisplayName("Ranger Instantiates Correctly the badge_number of 1.")
     public void getBadgeNumber_rangerInstantiatesWithBadgeNumber_1() {
         Ranger testRanger = setUpNewRanger();
-        assertEquals(1, testRanger.getBadgeNumber());
+        assertEquals("1", testRanger.getBadgeNumber());
     }
 
     @Test
@@ -56,8 +56,7 @@ public class RangerTest {
     public void save_insertsObjectIntoDatabase_Ranger() {
         Ranger testRanger = setUpNewRanger();
         testRanger.save();
-        assertTrue(Ranger.all().get(0).equals(testRanger));
-        assertTrue(Ranger.all().contains(testRanger));
+        assertEquals(1, Ranger.all().size());
     }
 
     @Test
@@ -75,8 +74,6 @@ public class RangerTest {
         testRanger.save();
         Ranger testRanger2 = setUpNewRanger2();
         testRanger2.save();
-        assertEquals(true, Ranger.all().get(0).equals(testRanger));
-        assertEquals(true, Ranger.all().get(1).equals(testRanger2));
         assertEquals(2, Ranger.all().size());
     }
 
@@ -91,12 +88,12 @@ public class RangerTest {
 
     @Test
     @DisplayName("Find returns correct object")
-    public void find_returnsPersonWithSameId_testRanger2() {
+    public void find_returnsRangerWithSameId_testRanger2() {
         Ranger testRanger = setUpNewRanger();
         testRanger.save();
         Ranger testRanger2 = setUpNewRanger2();
         testRanger2.save();
-        assertEquals(Ranger.find(testRanger2.getId()), testRanger2);
+        assertEquals( testRanger2, Ranger.find(testRanger2.getId()));
     }
 
     @Test
@@ -126,10 +123,10 @@ public class RangerTest {
     @Test
     @DisplayName("Validate name")
     public void ensureNameFieldCannotBeEmpty(){
-        Ranger testRanger = new Ranger("",1);
+        Ranger testRanger = new Ranger("","1");
         try {
             if (testRanger.getName().equals("")){
-                throw new IllegalArgumentException("You cannot leave this blank");
+                throw new IllegalArgumentException("You cannot leave Name blank");
             }
             testRanger.save();
 
@@ -137,6 +134,24 @@ public class RangerTest {
             System.out.println(e);
         }
         assertEquals("", testRanger.getName());
+        assertEquals(0, Ranger.all().size());
+    }
+
+    @Test
+    @DisplayName("Validate type")
+    public void ensureBadgeNumberFieldCannotBeEmpty(){
+
+        Ranger testRanger = new Ranger("Chuck", "");
+        try {
+            if (testRanger.getBadgeNumber().equals("")){
+                throw new IllegalArgumentException("You cannot leave Badge Number blank");
+            }
+            testRanger.save();
+
+        }catch (IllegalArgumentException e){
+            System.out.println(e);
+        }
+        assertEquals("", testRanger.getBadgeNumber());
         assertEquals(0, Ranger.all().size());
     }
 
@@ -150,7 +165,7 @@ public class RangerTest {
 
     //helper method.
     private Ranger setUpNewRanger() {
-        return new Ranger ("Chuck", 1);
+        return new Ranger ("Chuck", "1");
     }
-    private Ranger setUpNewRanger2() { return new Ranger ("Norris", 2); }
+    private Ranger setUpNewRanger2() { return new Ranger ("Norris", "2"); }
 }
