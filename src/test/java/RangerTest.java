@@ -4,8 +4,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.sql2o.Connection;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class RangerTest {
     @Rule
@@ -77,6 +76,15 @@ public class RangerTest {
         assertEquals(true, Ranger.all().get(0).equals(testRanger));
         assertEquals(true, Ranger.all().get(1).equals(testRanger2));
         assertEquals(2, Ranger.all().size());
+    }
+
+    @Test
+    @DisplayName("DB correctly assigns IDs to objects")
+    public void save_assignsIdToObject() {
+        Ranger testRanger = setUpNewRanger();
+        testRanger.save();
+        Ranger savedAnimal = Ranger.all().get(0);
+        assertEquals(testRanger.getId(), savedAnimal.getId());
     }
 
 

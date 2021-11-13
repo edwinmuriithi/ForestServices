@@ -57,4 +57,7 @@ public class Ranger {
         }
     }
 
+    public int getId() {
+        return id;
+    }
 }
