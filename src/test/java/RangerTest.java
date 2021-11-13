@@ -97,6 +97,18 @@ public class RangerTest {
         assertEquals(Ranger.find(testRanger2.getId()), testRanger2);
     }
 
+    @Test
+    @DisplayName("Delete by ID")
+    public void deleteById() {
+        Ranger testRanger = setUpNewRanger();
+        testRanger.save();
+        Ranger testRanger2 = setUpNewRanger2();
+        testRanger2.save();
+        testRanger.deleteById(testRanger.getId());
+        assertEquals(null, Ranger.find(testRanger.getId()));
+        assertEquals(1, Ranger.all().size());
+    }
+
 
 
 
