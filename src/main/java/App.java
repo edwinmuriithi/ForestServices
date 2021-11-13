@@ -14,7 +14,7 @@ public class App {
             return new ModelAndView(model,"index.hbs");
         },new HandlebarsTemplateEngine());
 
-        //navigate ranger creation form
+        //navigate to ranger creation form
         get("/create/ranger",(request, response) -> {
             Map<String,Object> model = new HashMap<String, Object>();
             return new ModelAndView(model,"ranger-form.hbs");
@@ -24,12 +24,30 @@ public class App {
         post("/create/ranger/new",(request, response) -> {
             Map<String,Object> model = new HashMap<String, Object>();
             String name = request.queryParams("name");
-            String badge_number = request.queryParams("badge");
+            String badge_number = request.queryParams("badgeNumber");
             Ranger ranger = new Ranger(name, badge_number);
             ranger.save();
             return new ModelAndView(model,"ranger-form.hbs");
         },new HandlebarsTemplateEngine());
 
+        // navigate to location creation form
+        get("/create/location",(request, response) -> {
+            Map<String,Object> model=new HashMap<String, Object>();
+            return new ModelAndView(model,"location-form.hbs");
+        },new HandlebarsTemplateEngine());
+
+        //create a location.
+        post("/create/location/new",(request, response) -> {
+            Map<String,Object> model = new HashMap<String, Object>();
+            String name = request.queryParams("name");
+            Location location = new Location(name);
+            try {
+                location.save();
+            }catch (IllegalArgumentException e){
+                System.out.println(e);
+            }
+            return new ModelAndView(model,"location-form.hbs");
+        },new HandlebarsTemplateEngine());
 
 
 
