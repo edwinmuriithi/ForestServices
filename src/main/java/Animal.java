@@ -6,12 +6,16 @@ public class Animal {
     //properties
     private String name;
     private String type;
-    private int id;
+    public int id;
+    public String health;
+    public String age;
 
     //constructor
     public Animal(String name, String type) {
         this.name = name;
         this.type = type;
+        this.health = "";
+        this.age = "";
     }
 
     @Override
@@ -87,10 +91,7 @@ public class Animal {
     }
 
 
-
-
-
-
-
-
-        }
+    public String getHealth() {
+        return health;
+    }
+}
