@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 import org.sql2o.Connection;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class RangerTest {
     @Rule
@@ -39,6 +40,14 @@ public class RangerTest {
     public void getBadgeNumber_rangerInstantiatesWithBadgeNumber_1() {
         Ranger testRanger = setUpNewRanger();
         assertEquals(1, testRanger.getBadgeNumber());
+    }
+
+    @Test
+    @DisplayName("Compare objects")
+    public void returnTrueIfNameAndTypeAreTheSame_true() {
+        Ranger testRanger = setUpNewRanger();
+        Ranger testRanger2 = setUpNewRanger();
+        assertTrue(testRanger.equals(testRanger2));
     }
 
 
