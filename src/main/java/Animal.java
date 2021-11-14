@@ -12,8 +12,6 @@ public class Animal {
     public static final String NORMAL = "normal";
     public static final String ANIMAL_TYPE="normal";
 
-
-
     //constructor
     public Animal(String name, String type) {
         this.name = name;

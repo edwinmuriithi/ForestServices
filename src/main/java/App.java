@@ -128,10 +128,22 @@ public class App {
         post("/create/sighting/new",(request, response) -> {
             Map<String,Object> model=new HashMap<String, Object>();
             int location_id = Integer.parseInt(request.queryParams("location"));
+            System.out.println("Location ID");
+            System.out.println(location_id);
             int ranger_id = Integer.parseInt(request.queryParams("ranger"));
+            System.out.println("Ranger ID");
+            System.out.println(ranger_id);
             int animal_id = Integer.parseInt(request.queryParams("animal"));
-            Sighting sighting = new Sighting(location_id, ranger_id, animal_id);
-            sighting.save();
+            System.out.println("Animal ID");
+            System.out.println(animal_id);
+            try{
+                Sighting sighting = new Sighting(location_id, ranger_id, animal_id);
+                sighting.save();
+
+            }catch (Exception e){
+                System.out.println(e);
+                System.out.println("There were some exceptions here");
+            }
             return new ModelAndView(model,"sighting-form.hbs");
         },new HandlebarsTemplateEngine());
 
@@ -141,12 +153,20 @@ public class App {
             List<Sighting> sightings = Sighting.all();
             ArrayList<String> animals = new ArrayList<String>();
             ArrayList<String> types = new ArrayList<String>();
-//            for (Sighting sighting : sightings){
-//                String animal_name = Animal.find(sighting.getAnimalId()).getName();
-//                String animal_type = Animal.find(sighting.getAnimalId()).getType();
-//                animals.add(animal_name);
-//                types.add(animal_type);
-//            }
+            for (Sighting sighting : sightings){
+                try{
+                    String animal_name = Animal.find(sighting.getAnimalId()).getName();
+                    System.out.println(animal_name);
+                    String animal_type = Animal.find(sighting.getAnimalId()).getType();
+                    System.out.println(animal_type);
+                    animals.add(animal_name);
+                    types.add(animal_type);
+                }catch (Exception e){
+                    System.out.println(e);
+                    System.out.println("There is a null pointer exception here.");
+                }
+
+            }
             model.put("sightings", sightings);
             model.put("animals", animals);
             model.put("types", types);
@@ -163,29 +183,28 @@ public class App {
 
         //create an animal.
         post("/create/animal/new",(request, response) -> {
-            Map<String,Object> model=new HashMap<String, Object>();
-            String type=request.queryParams("type");
+            Map<String,Object> model = new HashMap<String, Object>();
+            String type = request.queryParams("type");
             System.out.println(type);
-            String health=request.queryParams("health");
+            String health = request.queryParams("health");
             System.out.println(health);
-            String age=request.queryParams("age");
+            String age = request.queryParams("age");
             System.out.println(age);
-            String name=request.queryParams("name");
+            String name = request.queryParams("name");
             System.out.println(name);
             try{
                 if(type.equals(EndangeredAnimal.ANIMAL_TYPE)){
-                    EndangeredAnimal endangered=new EndangeredAnimal(name,EndangeredAnimal.ANIMAL_TYPE,health,age);
+                    EndangeredAnimal endangered = new EndangeredAnimal(name,EndangeredAnimal.ANIMAL_TYPE,health,age);
                     endangered.save();
                 }
                 else {
-                    Animal animal=new Animal(name,Animal.ANIMAL_TYPE);
+                    Animal animal = new Animal(name,Animal.ANIMAL_TYPE);
                     animal.save();
                      }
             }catch (NullPointerException e){
                 System.out.println(e);
                 System.out.println("There were some null fields");
-        }
-
+            }
             return new ModelAndView(model,"animal-form.hbs");
         },new HandlebarsTemplateEngine());
 
