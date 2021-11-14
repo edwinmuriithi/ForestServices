@@ -1,7 +1,9 @@
 import spark.ModelAndView;
 import spark.template.handlebars.HandlebarsTemplateEngine;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import static spark.Spark.*;
@@ -104,25 +106,26 @@ public class App {
             return new ModelAndView(model,"ranger-view.hbs");
         },new HandlebarsTemplateEngine());
 
-//        //view ranger's sightings
-//        get("/view/ranger/sightings/:id",(request, response) -> {
-//            Map<String,Object> model = new HashMap<String, Object>();
-//            int idOfRanger = Integer.parseInt(request.params(":id"));
-//            Ranger foundRanger = Ranger.find(idOfRanger);
-//            List<Sighting> sightings = foundRanger.getRangerSightings();
-//            ArrayList<String> animals = new ArrayList<String>();
-//            ArrayList<String> types = new ArrayList<String>();
-//            for (Sighting sighting : sightings){
-//                String animal_name = Animal.find(sighting.getAnimal_id()).getName();
-//                String animal_type = Animal.find(sighting.getAnimal_id()).getType();
-//                animals.add(animal_name);
-//                types.add(animal_type);
-//            }
-//            model.put("sightings",sightings);
-//            model.put("animals",animals);
-//            model.put("types",types);
-//            model.put("rangers",Ranger.all());
-//            return new ModelAndView(model,"ranger-view.hbs");
-//        },new HandlebarsTemplateEngine());
+        //view ranger's sightings
+        get("/view/ranger/sightings/:id",(request, response) -> {
+            Map<String,Object> model = new HashMap<String, Object>();
+            int idOfRanger = Integer.parseInt(request.params(":id"));
+            Ranger foundRanger = Ranger.find(idOfRanger);
+            List<Sighting> sightings = foundRanger.getRangerSightings();
+            ArrayList<String> animals = new ArrayList<String>();
+            ArrayList<String> types = new ArrayList<String>();
+
+            for (Sighting sighting : sightings){
+                String animal_name = Animal.find(sighting.getAnimalId()).getName();
+                String animal_type = Animal.find(sighting.getAnimalId()).getType();
+                animals.add(animal_name);
+                types.add(animal_type);
+            }
+            model.put("sightings",sightings);
+            model.put("animals",animals);
+            model.put("types",types);
+            model.put("rangers",Ranger.all());
+            return new ModelAndView(model,"ranger-view.hbs");
+        },new HandlebarsTemplateEngine());
     }
 }
