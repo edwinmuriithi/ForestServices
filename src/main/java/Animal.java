@@ -9,11 +9,13 @@ public class Animal {
     public int id;
     public String health;
     public String age;
+    public static final String NORMAL = "normal";
+
 
     //constructor
     public Animal(String name, String type) {
         this.name = name;
-        this.type = type;
+        this.type = NORMAL;
         this.health = "";
         this.age = "";
     }

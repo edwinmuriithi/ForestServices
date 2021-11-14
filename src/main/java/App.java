@@ -66,9 +66,34 @@ public class App {
             return new ModelAndView(model,"sighting-form.hbs");
         },new HandlebarsTemplateEngine());
 
+        // navigate to animal creation form
+        get("/create/animal",(request, response) -> {
+            Map<String,Object> model=new HashMap<String, Object>();
+            return new ModelAndView(model,"animal-form.hbs");
+        },new HandlebarsTemplateEngine());
 
+        //create an animal.
+        post("/create/animal/new",(request, response) -> {
+            Map<String,Object> model=new HashMap<String, Object>();
+            String name = request.queryParams("name");
+            System.out.println(name);
+            String type = request.queryParams("type");
+            System.out.println(type);
+            String health = request.queryParams("health");
+            System.out.println(health);
+            String age = request.queryParams("age");
+            System.out.println(age);
 
-
+            if(type.equals(EndangeredAnimal.ENDANGERED)){
+                EndangeredAnimal endangered = new EndangeredAnimal(name, EndangeredAnimal.ENDANGERED, health, age);
+                endangered.save();
+            }
+            else {
+                Animal animal = new Animal(name, Animal.NORMAL);
+                animal.save();
+            }
+            return new ModelAndView(model,"animal-form.hbs");
+        },new HandlebarsTemplateEngine());
 
 
     }
