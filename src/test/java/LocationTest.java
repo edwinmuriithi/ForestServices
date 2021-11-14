@@ -110,6 +110,23 @@ public class LocationTest {
         assertEquals(0, locations.size());
     }
 
+    @Test
+    public void allSightingsAreReturnedForRanger() {
+        Location location = setUpNewLocation();
+        try {
+            location.save();
+            Sighting sighting=new Sighting (location.getId(),1,1);
+            Sighting otherSighting=new Sighting (location.getId(),1,1);
+            sighting.save();
+            otherSighting.save();
+            assertEquals(location.getLocationSightings().get(0),sighting);
+            assertEquals(location.getLocationSightings().get(1),otherSighting);
+        }catch (IllegalArgumentException e){
+            System.out.println(e);
+        }
+
+    }
+
 
 
 

@@ -121,11 +121,41 @@ public class App {
                 animals.add(animal_name);
                 types.add(animal_type);
             }
-            model.put("sightings",sightings);
-            model.put("animals",animals);
-            model.put("types",types);
-            model.put("rangers",Ranger.all());
+            model.put("sightings", sightings);
+            model.put("animals", animals);
+            model.put("types", types);
+            model.put("rangers", Ranger.all());
             return new ModelAndView(model,"ranger-view.hbs");
         },new HandlebarsTemplateEngine());
+
+        //view locations
+        get("/view/locations",(request, response) -> {
+            Map<String,Object> model = new HashMap<String, Object>();
+            model.put("locations", Location.all());
+            return new ModelAndView(model,"location-view.hbs");
+        },new HandlebarsTemplateEngine());
+
+        //view locations' sightings
+        get("/view/location/sightings/:id",(request, response) -> {
+            Map<String,Object> model = new HashMap<String, Object>();
+            int idOfLocation = Integer.parseInt(request.params(":id"));
+            Location foundLocation = Location.find(idOfLocation);
+            List<Sighting> sightings = foundLocation.getLocationSightings();
+            ArrayList<String> animals = new ArrayList<String>();
+            ArrayList<String> types = new ArrayList<String>();
+            for (Sighting sighting : sightings){
+                String animal_name = Animal.find(sighting.getAnimalId()).getName();
+                String animal_type = Animal.find(sighting.getAnimalId()).getType();
+                animals.add(animal_name);
+                types.add(animal_type);
+            }
+            model.put("sightings", sightings);
+            model.put("animals", animals);
+            model.put("types", types);
+            model.put("locations", Location.all());
+            return new ModelAndView(model,"location-view.hbs");
+        },new HandlebarsTemplateEngine());
+
+
     }
 }
