@@ -158,8 +158,8 @@ public class App {
 
         //DEBUG LATER
         //view sightings
-        get("/view/sightings",(request, response) -> {
-            Map<String, Object> model = new HashMap<String, Object>();
+//        get("/view/sightings",(request, response) -> {
+//            Map<String, Object> model = new HashMap<String, Object>();
 //            List<Sighting> sightings = Sighting.all();
 //            ArrayList<String> animals = new ArrayList<String>();
 //            ArrayList<String> types = new ArrayList<String>();
@@ -172,7 +172,14 @@ public class App {
 //            model.put("sightings", sightings);
 //            model.put("animals", animals);
 //            model.put("types", types);
-            return new ModelAndView(model,"sighting-view.hbs");
+//            return new ModelAndView(model,"sighting-view.hbs");
+//        },new HandlebarsTemplateEngine());
+
+        //view animals
+        get("/view/animals",(request, response) -> {
+            Map<String,Object> model = new HashMap<String, Object>();
+            model.put("animals", Animal.all());
+            return new ModelAndView(model,"animal-view.hbs");
         },new HandlebarsTemplateEngine());
 
     }

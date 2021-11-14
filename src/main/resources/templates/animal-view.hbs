@@ -1,0 +1,22 @@
+{{#partial "content"}}
+animal-view
+
+<div>
+    {{#if animals}}
+        {{#each animals as |animal|}}
+            <div class="card text-white bg-dark mb-3" style="width: 18rem;">
+                <div class="card-body">
+                    <h5 class="card-title">{{animal.name}}</h5>
+                    <p class="card-text">{{animal.type}}</p>
+                    <p class="card-text">{{animal.health}}</p>
+                    <p class="card-text">{{animal.age}}</p>
+                </div>
+            </div>
+        {{/each}}
+    {{else}}
+        <p class="text display-7">There are no animals! Create some <a href = "/create/animal"><button class = "btn btn-info btn-md">Create Animal</button></a></p>
+    {{/if}}
+</div>
+
+{{/partial}}
+{{> layout.hbs}}

@@ -92,8 +92,9 @@ public class Animal {
         }
     }
 
-
+    //Get health
     public String getHealth() {
         return health;
     }
+
 }
