@@ -5,7 +5,7 @@ The Forest Service is considering a proposal from a timber company to clear-cut 
 
 
 
-##Project Setup Instructions
+## Project Setup Instructions
 ### Setup Requirements for Production Database
 * CREATE DATABASE wildlife_tracker;
 * CREATE TABLE animals (id serial PRIMARY KEY, name varchar,type VARCHAR,health VARCHAR,age VARCHAR);
