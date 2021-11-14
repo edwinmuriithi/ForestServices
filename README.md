@@ -6,6 +6,14 @@ The Forest Service is considering a proposal from a timber company to clear-cut 
 
 
 ## Project Setup Instructions
+
+- Fork this repo
+- Clone this repo
+- Setup necessary database.
+- Open  the project in your desired editor (I use IntelliJ)
+- Run the tests and make sure they pass
+- Run the app
+- 
 ### Setup Requirements for Production Database
 * CREATE DATABASE wildlife_tracker;
 * CREATE TABLE animals (id serial PRIMARY KEY, name varchar,type VARCHAR,health VARCHAR,age VARCHAR);
@@ -17,11 +25,6 @@ The Forest Service is considering a proposal from a timber company to clear-cut 
 
 ### Create a test database
 * CREATE DATABASE wildlife_tracker_test WITH TEMPLATE wildlife_tracker;
-- Fork this repo
-- Clone this repo
-- Open  the project in your desired editor (I use IntelliJ)
-- Run the tests and make sure they pass
-- Run the app
 
 ## Development.
 
