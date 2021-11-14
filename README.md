@@ -13,7 +13,7 @@ The Forest Service is considering a proposal from a timber company to clear-cut 
 - Open  the project in your desired editor (I use IntelliJ)
 - Run the tests and make sure they pass
 - Run the app
-- 
+
 ### Setup Requirements for Production Database
 * CREATE DATABASE wildlife_tracker;
 * CREATE TABLE animals (id serial PRIMARY KEY, name varchar,type VARCHAR,health VARCHAR,age VARCHAR);
