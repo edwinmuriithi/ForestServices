@@ -155,7 +155,24 @@ public class RangerTest {
         assertEquals(0, Ranger.all().size());
     }
 
-
+    @Test
+    @DisplayName("Ensure all Ranger's sightings are returned")
+    public void allSightingsAreReturnedForRanger() {
+        Ranger ranger = setUpNewRanger();
+        try {
+            Location location = new Location("Zone A");
+            ranger.save();
+            location.save();
+            Sighting sighting = new Sighting(location.getId(), ranger.getId(),1);
+            Sighting otherSighting = new Sighting(1, ranger.getId(),1);
+            sighting.save();
+            otherSighting.save();
+            assertEquals(ranger.getRangerSightings().get(0), sighting);
+            assertEquals(ranger.getRangerSightings().get(1), otherSighting);
+        }catch (IllegalArgumentException e){
+            System.out.println(e);
+        }
+    }
 
 
 

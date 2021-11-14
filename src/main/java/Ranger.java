@@ -1,5 +1,6 @@
 import org.sql2o.Connection;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -82,4 +83,30 @@ public class Ranger {
             con.createQuery(sql).addParameter("id", this.id).executeUpdate();
         }
     }
+
+    public List<Sighting> getRangerSightings(){
+        try (Connection con=DB.sql2o.open()){
+            String sql="SELECT sighting_id FROM rangers_sightings WHERE ranger_id = :ranger_id";
+            List<Integer> sightings_ids = con.createQuery(sql)
+                    .addParameter("ranger_id", this.getId())
+                    .executeAndFetch(Integer.class);
+            List<Sighting> sightings = new ArrayList<Sighting>();
+
+            for(Integer sighting_id:sightings_ids){
+                String sightingsQuery = "SELECT * FROM sightings WHERE id = :sighting_id";
+                Sighting sighting = con.createQuery(sightingsQuery)
+                        .addParameter("sighting_id", sighting_id)
+                        .executeAndFetchFirst(Sighting.class);
+                sightings.add(sighting); //put sightings in this array
+            }
+
+            if(sightings.size()==0){
+                throw new IllegalArgumentException("Ranger has no sighting");
+            }
+            else {return sightings;}
+
+        }
+
+    }
+
 }
