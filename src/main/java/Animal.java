@@ -10,6 +10,8 @@ public class Animal {
     public String health;
     public String age;
     public static final String NORMAL = "normal";
+    public static final String ANIMAL_TYPE="normal";
+
 
 
     //constructor

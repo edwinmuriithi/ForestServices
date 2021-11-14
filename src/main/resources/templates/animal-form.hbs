@@ -1,41 +1,44 @@
 {{#partial "content"}}
 animal-form
-<div class="form">
+<div class = "form">
 
-    <form action="/create/animal/new" method="post">
-        <h2 class="text display-6">CREATE ANIMAL</h2>
+    <form action = "/create/animal/new" method = "post">
+        <h2 class = "text display-6">CREATE ANIMAL</h2>
         <hr>
-         <div class="form-group">
+         <div class = "form-group">
             {{!--name--}}
-            <div class="form-group">
-              <label for="name">Animal</label>
-              <input type="text" class="form-control form-control-lg" id="name" name="name" placeholder="Animal" required>
+            <div class = "form-group">
+              <label for = "name">Animal</label>
+              <input type = "text" class = "form-control form-control-lg" id = "name" name = "name" placeholder = "Animal" required>
             </div>
             <br>
             {{!--type--}}
-            <label>Type</label>
-            <select class = "form-select form-select-lg">
-              <option type = "location" value = "normal">Normal</option>
-              <option type = "location" value = "endangered">Endangered</option>
-            </select>
+            <label for = "type" class = "form-label">Type</label>
+            <input class = "form-control" list = "types" name = "type" id = "type">
+            <datalist id = "types">
+              <option value = "normal">
+              <option value = "endangered">
+            </datalist>
             <br>
             {{!--health--}}
-            <label>Health status</label>
-            <select class = "form-select form-select-lg">
-              <option type = "health" value = "healthy">Healthy</option>
-              <option type = "health" value = "ill">Sickly</option>
-              <option type = "health" value = "okay">Okay</option>
-
-            </select>
+            <label for = "health" class = "form-label">Health</label>
+            <input class = "form-control" list = "healths" name = "health" id = "health">
+            <datalist id = "healths">
+              <option value = "healthy">
+              <option value = "ill">
+              <option value = "okay">
+            </datalist>
             <br>
             {{!--age--}}
-            <label>Age</label>
-            <select class = "form-select form-select-lg">
-              <option type = "age" value = "newborn">Newborn</option>
-              <option type = "age" value = "young">Young</option>
-              <option type = "age" value = "adult">Adult</option>
-            </select>
 
+            <label for = "age" class = "form-label">Age</label>
+            <input class = "form-control" list = "ages" name = "age" id = "age">
+            <datalist id = "ages">
+              <option value = "newborn">
+              <option value = "young">
+              <option value = "adult">
+            </datalist>
+            <br>
          </div>
 
         <hr>
@@ -43,6 +46,7 @@ animal-form
             <button type="submit" class="btn btn-success btn-lg"> Create </button>
         </div>
     </form>
+    <hr>
 
 </div>
 

@@ -18,6 +18,7 @@ public class App {
             return new ModelAndView(model,"index.hbs");
         },new HandlebarsTemplateEngine());
 
+//RANGERS
         //navigate to ranger creation form
         get("/create/ranger",(request, response) -> {
             Map<String,Object> model = new HashMap<String, Object>();
@@ -32,74 +33,6 @@ public class App {
             Ranger ranger = new Ranger(name, badge_number);
             ranger.save();
             return new ModelAndView(model,"ranger-form.hbs");
-        },new HandlebarsTemplateEngine());
-
-        // navigate to location creation form
-        get("/create/location",(request, response) -> {
-            Map<String,Object> model=new HashMap<String, Object>();
-            return new ModelAndView(model,"location-form.hbs");
-        },new HandlebarsTemplateEngine());
-
-        //create a location.
-        post("/create/location/new",(request, response) -> {
-            Map<String,Object> model = new HashMap<String, Object>();
-            String name = request.queryParams("name");
-            Location location = new Location(name);
-            try {
-                location.save();
-            }catch (IllegalArgumentException e){
-                System.out.println(e);
-            }
-            return new ModelAndView(model,"location-form.hbs");
-        },new HandlebarsTemplateEngine());
-
-        // navigate to sighting creation form
-        get("/create/sighting",(request, response) -> {
-            Map<String,Object> model=new HashMap<String, Object>();
-            model.put("rangers",Ranger.all());
-            model.put("locations",Location.all());
-            model.put("animals",Animal.all());
-            return new ModelAndView(model,"sighting-form.hbs");
-        },new HandlebarsTemplateEngine());
-
-        //create a sighting.
-        post("/create/sighting/new",(request, response) -> {
-            Map<String,Object> model=new HashMap<String, Object>();
-            int location_id = Integer.parseInt(request.queryParams("location"));
-            int ranger_id = Integer.parseInt(request.queryParams("ranger"));
-            int animal_id = Integer.parseInt(request.queryParams("animal"));
-            Sighting sighting = new Sighting(location_id, ranger_id, animal_id);
-            sighting.save();
-            return new ModelAndView(model,"sighting-form.hbs");
-        },new HandlebarsTemplateEngine());
-
-        // navigate to animal creation form
-        get("/create/animal",(request, response) -> {
-            Map<String,Object> model=new HashMap<String, Object>();
-            return new ModelAndView(model,"animal-form.hbs");
-        },new HandlebarsTemplateEngine());
-
-        //create an animal.
-        post("/create/animal/new",(request, response) -> {
-            Map<String,Object> model=new HashMap<String, Object>();
-            String name = request.queryParams("name");
-            System.out.println(name);
-            String type = request.queryParams("type");
-            System.out.println(type);
-            String health = request.queryParams("health");
-            System.out.println(health);
-            String age = request.queryParams("age");
-            System.out.println(age);
-
-            if(type.equals(EndangeredAnimal.ENDANGERED)){
-                EndangeredAnimal endangered = new EndangeredAnimal(name, EndangeredAnimal.ENDANGERED, health, age);
-                endangered.save();
-            }
-            else {
-                Animal animal = new Animal(name, Animal.NORMAL);
-                animal.save();
-            }
-            return new ModelAndView(model,"animal-form.hbs");
         },new HandlebarsTemplateEngine());
 
         //view rangers
@@ -131,6 +64,27 @@ public class App {
             return new ModelAndView(model,"ranger-view.hbs");
         },new HandlebarsTemplateEngine());
 
+
+//LOCATIONS
+        // navigate to location creation form
+        get("/create/location",(request, response) -> {
+            Map<String,Object> model=new HashMap<String, Object>();
+            return new ModelAndView(model,"location-form.hbs");
+        },new HandlebarsTemplateEngine());
+
+        //create a location.
+        post("/create/location/new",(request, response) -> {
+            Map<String,Object> model = new HashMap<String, Object>();
+            String name = request.queryParams("name");
+            Location location = new Location(name);
+            try {
+                location.save();
+            }catch (IllegalArgumentException e){
+                System.out.println(e);
+            }
+            return new ModelAndView(model,"location-form.hbs");
+        },new HandlebarsTemplateEngine());
+
         //view locations
         get("/view/locations",(request, response) -> {
             Map<String,Object> model = new HashMap<String, Object>();
@@ -159,6 +113,28 @@ public class App {
             return new ModelAndView(model,"location-view.hbs");
         },new HandlebarsTemplateEngine());
 
+
+//SIGHTINGS
+        // navigate to sighting creation form
+        get("/create/sighting",(request, response) -> {
+            Map<String,Object> model=new HashMap<String, Object>();
+            model.put("rangers",Ranger.all());
+            model.put("locations",Location.all());
+            model.put("animals",Animal.all());
+            return new ModelAndView(model,"sighting-form.hbs");
+        },new HandlebarsTemplateEngine());
+
+        //create a sighting.
+        post("/create/sighting/new",(request, response) -> {
+            Map<String,Object> model=new HashMap<String, Object>();
+            int location_id = Integer.parseInt(request.queryParams("location"));
+            int ranger_id = Integer.parseInt(request.queryParams("ranger"));
+            int animal_id = Integer.parseInt(request.queryParams("animal"));
+            Sighting sighting = new Sighting(location_id, ranger_id, animal_id);
+            sighting.save();
+            return new ModelAndView(model,"sighting-form.hbs");
+        },new HandlebarsTemplateEngine());
+
         //view sightings
         get("/view/sightings",(request, response) -> {
             Map<String, Object> model = new HashMap<String, Object>();
@@ -175,6 +151,42 @@ public class App {
             model.put("animals", animals);
             model.put("types", types);
             return new ModelAndView(model,"sighting-view.hbs");
+        },new HandlebarsTemplateEngine());
+
+
+//ANIMALS
+        // navigate to animal creation form
+        get("/create/animal",(request, response) -> {
+            Map<String,Object> model=new HashMap<String, Object>();
+            return new ModelAndView(model,"animal-form.hbs");
+        },new HandlebarsTemplateEngine());
+
+        //create an animal.
+        post("/create/animal/new",(request, response) -> {
+            Map<String,Object> model=new HashMap<String, Object>();
+            String type=request.queryParams("type");
+            System.out.println(type);
+            String health=request.queryParams("health");
+            System.out.println(health);
+            String age=request.queryParams("age");
+            System.out.println(age);
+            String name=request.queryParams("name");
+            System.out.println(name);
+            try{
+                if(type.equals(EndangeredAnimal.ANIMAL_TYPE)){
+                    EndangeredAnimal endangered=new EndangeredAnimal(name,EndangeredAnimal.ANIMAL_TYPE,health,age);
+                    endangered.save();
+                }
+                else {
+                    Animal animal=new Animal(name,Animal.ANIMAL_TYPE);
+                    animal.save();
+                     }
+            }catch (NullPointerException e){
+                System.out.println(e);
+                System.out.println("There were some null fields");
+        }
+
+            return new ModelAndView(model,"animal-form.hbs");
         },new HandlebarsTemplateEngine());
 
         //view animals
