@@ -15,7 +15,7 @@ The Forest Service is considering a proposal from a timber company to clear-cut 
 * CREATE TABLE rangers_sightings (id serial PRIMARY KEY,ranger_id INT,sighting_id INT);
 * CREATE TABLE sightings (id serial PRIMARY KEY,animal_id INT,ranger_id INT,location_id INT,time TIMESTAMP);
 
-###Create a test database
+### Create a test database
 * CREATE DATABASE wildlife_tracker_test WITH TEMPLATE wildlife_tracker;
 - Fork this repo
 - Clone this repo
